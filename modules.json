@@ -1,0 +1,95 @@
+{
+    "1": {
+        "title": "Random Library",
+        "tasks": {
+            "1": {
+                "title": "Random Library",
+                "description": "Learn about the random library.",
+                "image": "images/terminal.png"
+            }
+        }
+    },
+    "2": {
+        "title": "PIL Library (Pillow)",
+        "tasks": {
+            "1": {
+                "title": "PIL Library (Pillow)",
+                "description": "Understand the PIL library.",
+                "image": "images/terminal.png"
+            }
+        }
+    },
+    "3": {
+        "title": "Wave Library",
+        "tasks": {
+            "1": {
+                "title": "Wave Library",
+                "description": "Learn about the wave library.",
+                "image": "images/terminal.png"
+            }
+        }
+    },
+    "4": {
+        "title": "PyGame. Draw Module",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Draw Module",
+                "description": "Learn about PyGame draw module."
+            }
+        }
+    },
+    "5": {
+        "title": "PyGame. Surfaces. Animation and Time",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Surfaces. Animation and Time",
+                "description": "Understand PyGame surfaces, animation, and time."
+            }
+        }
+    },
+    "6": {
+        "title": "PyGame. Mouse Events",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Mouse Events",
+                "description": "Learn about PyGame mouse events."
+            }
+        }
+    },
+    "7": {
+        "title": "PyGame. Keyboard Events",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Keyboard Events",
+                "description": "Learn about PyGame keyboard events."
+            }
+        }
+    },
+    "8": {
+        "title": "PyGame. Output Text. Game Counter",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Output Text. Game Counter",
+                "description": "Understand PyGame output text and game counter."
+            }
+        }
+    },
+    "9": {
+        "title": "PyGame. Load and Control Images",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Load and Control Images",
+                "description": "Learn about PyGame image loading and control."
+            }
+        }
+    },
+    "10": {
+        "title": "PyGame. Object Collisions",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Object Collisions",
+                "description": "Understand PyGame object collisions."
+            }
+        }
+    }
+}

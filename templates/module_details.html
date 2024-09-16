@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ module.title }} - My Course Site{% endblock %}
+
+{% block content %}
+    <div class="module-detail-container">
+        <h1>{{ module.title }}</h1>
+        <div class="task-nav">
+            {% for task_id, task in module.tasks.items() %}
+                <a href="#task{{ task_id }}">{{ task.title }}</a>
+            {% endfor %}
+        </div>
+        <div class="task-content">
+            {% for task_id, task in module.tasks.items() %}
+                <div id="task{{ task_id }}" class="task">
+                    <h2>{{ task.title }}</h2>
+                    <p>{{ task.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

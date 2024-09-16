@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Course Site{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('serve_static', filename='css/styles.css') }}">
+    <script src="{{ url_for('serve_static', filename='js/module.js') }}" defer></script>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1><a href="{{ url_for('home') }}">My Course Site</a></h1>
+            <div class="task-icons">
+                {% for task_id, task in module.tasks.items() %}
+                    <a href="#task{{ task_id }}" class="task-icon-link">
+                        <img src="{{ url_for('serve_static', filename='images/terminal.png') }}" alt="{{ task.title }}" class="task-icon">
+                    </a>
+                {% endfor %}
+            </div>
+            <div class="auth-links">
+                <a href="/login">Login</a> | <a href="/register">Register</a>
+            </div>
+        </div>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
