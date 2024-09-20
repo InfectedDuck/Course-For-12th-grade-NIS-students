@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, abort, send_from_directory
 import json
 
 app = Flask(__name__)
-
+# loading modules from json file
 with open('modules.json') as f:
     modules = json.load(f)
 
