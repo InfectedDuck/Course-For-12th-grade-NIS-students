@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ module.title }} - My Course Site{% endblock %}
+
+{% block content %}
+    <div class="module-detail-container">
+        <aside class="sidebar">
+            <h2>Modules</h2>
+            <ul>
+                {% for module_id, module in modules.items() %}
+                    <li>
+                        <a href="{{ url_for('module_detail', module_id=module_id) }}" class="module-link">
+                            {{ module.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="module-header">
+                <h1>{{ module.title }}</h1>
+                <div class="task-icons">
+                    {% for task_id, task in module.tasks.items() %}
+                        <a href="{{ url_for('task_detail', module_id=module_id, task_id=task_id) }}" class="task-icon-link">
+                            <span class="task-icon">{{ task.title }}</span>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="task-content">
+                {% for task_id, task in module.tasks.items() %}
+                    <div id="task{{ task_id }}" class="task">
+                        <h2>{{ task.title }}</h2>
+                        <p>{{ task.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+{% endblock %}

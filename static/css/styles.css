@@ -1,0 +1,420 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #fce4ec; /* Light pink background */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full viewport height */
+}
+
+/* Header Styles */
+header {
+    background-color: #f8bbd0; /* Slightly darker pink */
+    padding: 10px; /* Reduced padding */
+    border-bottom: 2px solid #880e4f; /* Dark pink border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Fixed position for header */
+    width: 100%; /* Full width */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    z-index: 1000; /* Ensure header is above other content */
+}
+
+/* Header Container */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Header Title */
+.header-container h1 {
+    margin: 0;
+    font-size: 20px; /* Adjust font size */
+}
+
+.header-container h1 a {
+    text-decoration: none;
+    color: #880e4f; /* Dark pink */
+}
+
+/* Auth Links */
+.auth-links a {
+    text-decoration: none;
+    color: #880e4f; /* Dark pink */
+    margin-left: 15px;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Task Carousel */
+.task-carousel {
+    display: flex;
+    align-items: center;
+    overflow: hidden; /* Hide overflow for carousel effect */
+    margin-top: 10px; /* Space between header and carousel */
+}
+
+.task-nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.task-icons {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping */
+    margin: 0 10px; /* Spacing around task icons */
+}
+
+.task-icon-link {
+    display: inline-block;
+    margin: 0 5px; /* Spacing between icons */
+}
+
+.prev, .next {
+    background-color: #e91e63; /* Button color */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.prev:hover, .next:hover {
+    background-color: #880e4f; /* Dark pink on hover */
+}
+
+/* Container for Sidebar and Main Content */
+.module-detail-container {
+    display: flex;
+    flex: 1;
+    margin-top: 80px; /* Space for fixed header */
+    overflow: hidden; /* Ensure no overflow */
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: #f8bbd0; /* Slightly darker pink */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Vertical scrollbar */
+    position: sticky; /* Sticky position for sidebar */
+    top: 0; /* Align to the top */
+    height: calc(100vh - 80px); /* Full height minus header */
+}
+
+/* Sidebar Title */
+.sidebar h2 {
+    margin-top: 0;
+    font-size: 20px; /* Larger font size */
+    color: #880e4f; /* Dark pink */
+}
+
+/* Sidebar List Styles */
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: #880e4f; /* Dark pink */
+    font-size: 16px; /* Adjust font size */
+    display: block;
+    padding: 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: #e91e63; /* Different shade of pink */
+    color: white;
+}
+
+/* Main Content Styles */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background-color: #ffffff; /* White background for content */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centering content horizontally */
+    justify-content: flex-start; /* Align content to the top */
+}
+
+.module-header {
+    width: 100%; /* Full width for module header */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center header content */
+    margin-bottom: 20px;
+}
+
+.module-header h1 {
+    margin: 0;
+    font-size: 28px; /* Larger font size */
+    color: #880e4f; /* Dark pink */
+}
+
+.task-content {
+    width: 100%;
+    max-width: 1200px; /* Limit the width for readability */
+    padding: 0 20px; /* Padding for better spacing */
+}
+
+.task {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fce4ec; /* Light pink background */
+    border: 1px solid #880e4f; /* Dark pink border */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.task h2 {
+    margin-top: 0;
+    font-size: 22px; /* Adjust font size */
+}
+
+.task p {
+    margin: 10px 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .task-detail-container {
+        flex-direction: column;
+    }
+
+    .sidebar,
+    .main-content {
+        width: 100%;
+    }
+
+    .sidebar {
+        border-right: none; /* Remove right border on small screens */
+        border-bottom: 2px solid #e3e3e3; /* Add bottom border */
+    }
+}
+
+/* Footer Styles */
+footer {
+    background-color: #f8bbd0; /* Slightly darker pink */
+    padding: 20px;
+    border-top: 2px solid #880e4f; /* Dark pink border */
+    position: relative;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping of items if needed */
+}
+
+.footer-tasks {
+    width: 100%;
+    max-width: 1200px; /* Limit width for readability */
+    margin: 0 auto; /* Center tasks */
+    padding: 0 20px;
+}
+
+.footer-tasks h2 {
+    margin-top: 0;
+    font-size: 20px; /* Adjust font size */
+    color: #880e4f; /* Dark pink */
+}
+
+.task-footer-item {
+    margin-bottom: 10px;
+}
+
+.task-footer-link {
+    text-decoration: none;
+    background-color: #e91e63; /* Different shade of pink */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.task-footer-link:hover {
+    background-color: #880e4f; /* Dark pink on hover */
+}
+
+/* Task Detail Container */
+.task-detail-container {
+    display: flex;
+    margin: 20px;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 25%; /* Adjust as needed */
+    background-color: #f8f9fa; /* Light background for contrast */
+    padding: 20px;
+    border-right: 2px solid #e3e3e3;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.module-link {
+    text-decoration: none;
+    color: #ff4081; /* Pink color for links */
+    transition: color 0.3s;
+}
+
+.module-link:hover {
+    color: #d5006d; /* Darker pink on hover */
+}
+
+/* Main content styles */
+.main-content {
+    width: 75%; /* Adjust as needed */
+    padding: 20px;
+}
+
+.task-header {
+    margin-bottom: 20px;
+}
+
+.task-header h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.task-header p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Task content styles */
+.task-content h2 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    color: #ff4081; /* Pink color for section titles */
+}
+
+.task-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.task-content code {
+    display: block;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-left: 4px solid #ff4081; /* Pink left border */
+    margin: 10px 0;
+}
+
+/* Task Header Styles */
+.task-header {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #ffeef8; /* Light pink background for the header */
+    border: 1px solid #d81b60; /* Dark pink border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.task-header h1 {
+    font-size: 2rem; /* Larger font size */
+    color: #880e4f; /* Dark pink color */
+    margin-bottom: 10px;
+}
+
+.task-header p {
+    font-size: 1.1rem; /* Slightly larger font size */
+    color: #555; /* Dark gray for better readability */
+    line-height: 1.6; /* Better line spacing */
+}
+
+/* Task Content Styles */
+.task-content {
+    padding: 20px;
+    background-color: #fff; /* White background for content */
+    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #e0e0e0; /* Light border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 20px; /* Space between header and content */
+}
+
+.task-content h2 {
+    font-size: 1.5rem; /* Larger font size for section titles */
+    color: #d81b60; /* Dark pink color */
+    margin-top: 20px; /* Space above section titles */
+}
+
+.task-content p {
+    font-size: 1rem; /* Regular font size for paragraph text */
+    color: #333; /* Dark gray color for readability */
+    line-height: 1.6; /* Improved line spacing */
+}
+
+/* Code Block Styles */
+pre {
+    background-color: #f4f4f4; /* Light gray background for code */
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners */
+    border-left: 4px solid #d81b60; /* Left border in dark pink */
+    overflow-x: auto; /* Horizontal scroll for long lines */
+}
+
+/* List Styles */
+.task-content ul {
+    padding-left: 20px; /* Indent list items */
+}
+
+.task-content ul li {
+    margin-bottom: 10px; /* Space between list items */
+}
+
+* Button Styles */
+.task-buttons {
+    margin-top: 20px; /* Space above buttons */
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+.btn {
+    background-color: #e91e63; /* Button background color */
+    color: white; /* Button text color */
+    padding: 10px 20px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s ease; /* Transition effect */
+}
+
+.btn:hover {
+    background-color: #880e4f; /* Darker shade on hover */
+}

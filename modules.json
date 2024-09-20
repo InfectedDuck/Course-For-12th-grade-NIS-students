@@ -1,0 +1,163 @@
+{
+        "1": {
+          "title": "Random Module",
+          "description": "This module focuses on working with pseudorandom sequences, which are essential in mathematical modeling, cryptography, and various games.",
+          "tasks": {
+            "task_1": {
+              "title": "Introduction to random module",
+              "description": "Этот модуль предназначен для работы с псевдослучайными последовательностями. Такие последовательности важны в математическом моделировании, в криптографии и в различных играх.",
+              "content": {
+                "overview": "Модуль 'random' предоставляет множество функций для генерации псевдослучайных чисел и последовательностей.",
+                "structure": {
+                  "example": ">>> import random\n>>> dir(random)\n['BPF', ... , 'choice', ... , 'randint', 'random', 'randrange', 'sample', 'seed', 'setstate', 'shuffle', 'triangular', ...]"
+                },
+                "functions": {
+                  "randint": {
+                    "description": "Генерирует случайное целое число между заданными границами (включительно).",
+                    "example": "from random import randint\nprint(randint(10, 20))"
+                  },
+                  "randrange": {
+                    "description": "Генерирует случайное число из диапазона с опциональной возможностью задать шаг.",
+                    "example": "from random import randrange\nprint(randrange(40, 100, 5))"
+                  },
+                  "choice": {
+                    "description": "Выбирает случайный элемент из последовательности (список, кортеж, строка и т.д.).",
+                    "examples": [
+                      "from random import choice\nprint(choice(['heads', 'tails']))",
+                      "from random import choice\nprint(choice([1, 2, 3]))",
+                      "choice(\"ab\")"
+                    ]
+                  },
+                  "dice_simulation": {
+                    "description": "Симуляция бросков кубиков с использованием функции choice.",
+                    "example": "from random import choice\n\n# Симуляция нескольких бросков кубиков\nfor i in range(1, 10):\n    print(choice([1, 2, 3, 4, 5, 6]), choice([1, 2, 3, 4, 5, 6]))"
+                  },
+                  "unicode_dice_simulation": {
+                    "description": "Симуляция бросков игральных кубиков с символами Unicode.",
+                    "example": "from random import choice\n\ndashes = ['\\u2680', '\\u2681', '\\u2682', '\\u2683', '\\u2684', '\\u2685']\nfor i in range(1, 10):\n    print(choice(dashes), choice(dashes))"
+                  },
+                  "magic_8_ball": {
+                    "description": "Симуляция магического шара, отвечающего на вопросы 'да' или 'нет'.",
+                    "example": "from random import choice\n\nchoices = [\n    'It is certain (Бесспорно)',\n    'It is decidedly so (Предрешено)',\n    'Without a doubt (Никаких сомнений)',\n    'Yes — definitely (Определённо да)',\n    'You may rely on it (Можешь быть уверен в этом)',\n    'As I see it, yes (Мне кажется — «да»)',\n    'Most likely (Вероятнее всего)',\n    'Outlook good (Хорошие перспективы)',\n    'Signs point to yes (Знаки говорят — «да»)',\n    'Yes (Да)',\n    'Reply hazy, try again (Пока не ясно, попробуй снова)',\n    'Ask again later (Спроси позже)',\n    'Better not tell you now (Лучше не рассказывать)',\n    'Cannot predict now (Сейчас нельзя предсказать)',\n    'Concentrate and ask again (Соберись и спроси опять)',\n    'Don’t count on it (Даже не думай)',\n    'My reply is no (Мой ответ — «нет»)',\n    'My sources say no (По моим данным — «нет»)',\n    'Outlook not so good (Перспективы не очень хорошие)',\n    'Very doubtful (Весьма сомнительно)'\n]\n\nfor i in range(5):\n    input('Ваш вопрос: ')\n    print(choice(choices))"
+                  },
+                  "choices": {
+                    "description": "Выбор нескольких случайных элементов с возможностью повторений.",
+                    "example": "from random import choices\nprint(choices(['Yes', 'No', 'Maybe'], k=5))"
+                  },
+                  "sample": {
+                    "description": "Возвращает несколько случайных элементов без повторений.",
+                    "example": "from random import sample\nprint(sample(range(10), 6))"
+                  },
+                  "shuffle": {
+                    "description": "Перемешивает список на месте.",
+                    "example": "from random import shuffle\na = list(range(100))\nshuffle(a)\nprint(a[:10])"
+                  },
+                  "random": {
+                    "description": "Генерирует случайное вещественное число в диапазоне от 0 до 1 (не включительно).",
+                    "example": "from random import random as rnd\nprint(rnd())"
+                  }
+                }
+              }
+            },
+            "task_2": {
+                    "title": "Random type of application",
+                    "description": "Write a program to create a list of types of applications and output random choice."
+            },
+            "task_3": {
+                "title": "Shuffle",
+                "description": "Write a program to shuffle numbers between 0 and 10 (not inclusive).\n\nSample Output:\n[5 7 9 0 2 3 1 6 8 4]"
+            },
+            "task_4": {
+                "title": "Sportloto",
+                "description": "Write a program to implement 'Sportloto' 5 from 36. Output five random numbers in ascending order."
+            },
+            "task_5": {
+                "title": "Heads or tails",
+                "description": "Write a program that simulates tossing coins. The number of attempts is entered from the keyboard. The program should display the results of the rolls: heads or tails."
+            }
+        }
+        },
+      
+  
+    "2": {
+        "title": "PIL Library (Pillow)",
+        "tasks": {
+            "1": {
+                "title": "PIL Library (Pillow)",
+                "description": "Understand the PIL library."
+            }
+        }
+    },
+    "3": {
+        "title": "Wave Library",
+        "tasks": {
+            "1": {
+                "title": "Wave Library",
+                "description": "Learn about the wave library."
+            }
+        }
+    },
+    "4": {
+        "title": "PyGame. Draw Module",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Draw Module",
+                "description": "Learn about PyGame draw module."
+            }
+        }
+    },
+    "5": {
+        "title": "PyGame. Surfaces. Animation and Time",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Surfaces. Animation and Time",
+                "description": "Understand PyGame surfaces, animation, and time."
+            }
+        }
+    },
+    "6": {
+        "title": "PyGame. Mouse Events",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Mouse Events",
+                "description": "Learn about PyGame mouse events."
+            }
+        }
+    },
+    "7": {
+        "title": "PyGame. Keyboard Events",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Keyboard Events",
+                "description": "Learn about PyGame keyboard events."
+            }
+        }
+    },
+    "8": {
+        "title": "PyGame. Output Text. Game Counter",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Output Text. Game Counter",
+                "description": "Understand PyGame output text and game counter."
+            }
+        }
+    },
+    "9": {
+        "title": "PyGame. Load and Control Images",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Load and Control Images",
+                "description": "Learn about PyGame image loading and control."
+            }
+        }
+    },
+    "10": {
+        "title": "PyGame. Object Collisions",
+        "tasks": {
+            "1": {
+                "title": "PyGame. Object Collisions",
+                "description": "Understand PyGame object collisions."
+            }
+        }
+    }
+}

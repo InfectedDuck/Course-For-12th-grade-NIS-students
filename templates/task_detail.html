@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ task.title }} - My Course Site{% endblock %}
+
+{% block content %}
+<div class="task-detail-container">
+    <aside class="sidebar">
+        <h2>Modules</h2>
+        <ul>
+            {% if modules %}
+                {% for module_id, module in modules.items() %}
+                    <li>
+                        <a href="{{ url_for('module_detail', module_id=module_id) }}" class="module-link">
+                            {{ module.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>No modules available</li>
+            {% endif %}
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="task-header">
+            <h1>{{ task.title }}</h1>
+            <p>{{ task.description }}</p>
+        </div>
+
+        <div class="task-content">
+            {% if task.content %}
+                {% if task.content.overview %}
+                    <h2>Overview</h2>
+                    <p>{{ task.content.overview }}</p>
+                {% endif %}
+
+                {% if task.content.functions %}
+                    <h2>Functions</h2>
+                    <ul>
+                        {% for function_name, function in task.content.functions.items() %}
+                            <li>
+                                <strong>{{ function_name }}</strong>: {{ function.description }}
+                                <br>
+                                <pre><code>{{ function.example }}</code></pre>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% for item_key, item in task.content.items() %}
+                    {% if item_key not in ['overview', 'functions'] %}
+                        <h2>{{ item_key.replace('_', ' ').title() }}</h2>
+                        <p>{{ item.description }}</p>
+                        {% if item.example %}
+                            <pre><code>{{ item.example }}</code></pre>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>No additional content available for this task.</p>
+            {% endif %}
+        </div>
+    </main>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Python Programming Modules{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Modules</h2>
+            <ul>
+                {% for module_id, module in modules.items() %}
+                    <li>
+                        <a href="{{ url_for('module_detail', module_id=module_id) }}" class="module-link">{{ module.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <script src="{{ url_for('serve_static', filename='js/module.js') }}" defer></script>
+{% endblock %}
