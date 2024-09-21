@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Advanced Python Interpreter{% endblock %}
+
+{% block content %}
+<div class="interpreter-container">
+    <h1>Online Python Interpreter</h1>
+    <textarea id="code" rows="10" cols="50" placeholder="Write your Python code here..."></textarea><br>
+    <button id="run-btn" class="btn btn-primary">Run Code</button>
+
+    <h2>Output:</h2>
+    <pre id="output" class="border p-2"></pre>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+
+<script>
+    const editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+        lineNumbers: true,
+        mode: "python",
+        theme: "default",
+        indentWithTabs: true,
+        tabSize: 4,
+        extraKeys: {
+            "Enter": function(cm) {
+                const cursor = cm.getCursor();
+                const line = cm.getLine(cursor.line);
+                const trimmedLine = line.trim();
+
+                // Check if the line ends with ':' to handle control statements
+                if (trimmedLine.endsWith(':')) {
+                    cm.replaceRange('\n' + ' '.repeat(4), cursor); // Indent for the next line
+                    cm.setCursor(cursor.line + 1, 4); // Move the cursor to the right indentation
+                } else {
+                    cm.replaceRange('\n' + line.match(/^\s*/)[0], cursor); // Maintain current indentation level
+                    cm.setCursor(cursor.line + 1, line.match(/^\s*/)[0].length); // Move to the same indentation level
+                }
+            },
+            "Shift-Enter": function(cm) {
+                const cursor = cm.getCursor();
+                cm.replaceRange('\n', cursor); // Insert a new line without indentation
+                cm.setCursor(cursor.line + 1, 0); // Move the cursor to the start of the new line
+            },
+            "Tab": function(cm) {
+                cm.replaceSelection('    '); // Add 4 spaces for tab
+            }
+        }
+    });
+
+    document.getElementById('run-btn').addEventListener('click', function() {
+        const code = editor.getValue();
+        fetch('/interpreter', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ code: code })
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => { throw new Error(err.error); });
+            }
+            return response.json();
+        })
+        .then(data => {
+            const outputElement = document.getElementById('output');
+            outputElement.textContent = data.stdout || '';
+            if (data.stderr) {
+                outputElement.textContent += '\nError:\n' + data.stderr;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error.message);
+            document.getElementById('output').textContent = 'Error: ' + error.message;
+        });
+    });
+</script>
+{% endblock %}
