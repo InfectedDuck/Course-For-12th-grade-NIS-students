@@ -418,3 +418,225 @@ pre {
 .btn:hover {
     background-color: #880e4f; /* Darker shade on hover */
 }
+.task-detail-container {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px; /* Adjust width as needed */
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background color */
+    border-right: 1px solid #ddd; /* Light border on the right */
+}
+
+.explanation-container {
+    flex: 1; /* Take up the remaining space */
+    padding: 20px; /* Padding around content */
+    background-color: #ffffff; /* White background for content */
+}
+
+h1 {
+    margin-top: 0; /* Remove default margin for h1 */
+}
+
+.buttons {
+    margin-bottom: 20px; /* Space below buttons */
+}
+
+.explanation-btn {
+    margin-right: 10px; /* Space between buttons */
+    padding: 10px 15px; /* Padding for buttons */
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.explanation-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.explanation {
+    margin-top: 20px; /* Space above explanations */
+}
+
+.explanation h2 {
+    margin-bottom: 10px; /* Space below h2 */
+}
+
+/* General Styles */
+.explanation-container {
+    padding: 20px;
+    background-color: #fff; /* White background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Title Styles */
+.explanation-container h1 {
+    font-size: 2.5rem; /* Larger title */
+    color: #880e4f; /* Dark pink color */
+    margin-bottom: 20px; /* Space below title */
+    text-align: center; /* Centered title */
+}
+
+/* Button Styles */
+.buttons {
+    display: flex;
+    justify-content: center; /* Center buttons */
+    gap: 15px; /* Space between buttons */
+    margin-bottom: 30px; /* Space below buttons */
+}
+
+.explanation-btn {
+    padding: 12px 20px; /* Padding for buttons */
+    background-color: #e91e63; /* Button color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Transition effects */
+    font-weight: bold; /* Bold text */
+}
+
+.explanation-btn:hover {
+    background-color: #880e4f; /* Darker pink on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Explanation Section Styles */
+.explanation {
+    margin-bottom: 20px; /* Space below each explanation */
+    padding: 15px; /* Padding around explanations */
+    background-color: #fce4ec; /* Light pink background */
+    border-left: 5px solid #d81b60; /* Dark pink left border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Explanation Title Styles */
+.explanation h2 {
+    font-size: 1.8rem; /* Section title size */
+    color: #d81b60; /* Dark pink */
+    margin-bottom: 10px; /* Space below section title */
+}
+
+/* Text Styles */
+.explanation p {
+    font-size: 1rem; /* Regular font size */
+    color: #333; /* Dark gray */
+    line-height: 1.6; /* Improved line spacing */
+    margin: 10px 0; /* Margin above and below paragraphs */
+}
+
+/* Highlighted Text */
+strong {
+    color: #ff4081; /* Highlighted text color */
+}
+
+code {
+    background-color: #f4f4f4; /* Light gray background for code */
+    padding: 2px 5px; /* Padding around code */
+    border-radius: 3px; /* Rounded corners */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px; /* Reduce gap between buttons */
+    }
+}
+
+.solution-container {
+    padding: 30px;
+    background-color: #fff; /* White background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #d5006d; /* Accent color for headings */
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin: 20px 0 10px;
+    border-bottom: 2px solid #d5006d; /* Underline for emphasis */
+    padding-bottom: 5px;
+}
+
+.solution-code {
+    background-color: #eef; /* Light background for code section */
+    padding: 15px;
+    border-radius: 5px;
+    overflow: auto;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+    font-size: 1em;
+    line-height: 1.5;
+    border: 1px solid #d5006d; /* Border to define the code area */
+}
+
+pre {
+    margin: 0; /* Remove default margin */
+}
+
+.solution-steps {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9; /* Slightly grey background */
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Light border */
+}
+
+.solution-steps ol {
+    margin-left: 20px; /* Indent for ordered list */
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 0 10px;
+    background-color: #d5006d; /* Button color */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1em;
+}
+
+.btn:hover {
+    background-color: #b0004d; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+@media (max-width: 600px) {
+    .solution-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em; /* Responsive font size */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Responsive font size */
+    }
+
+    .btn {
+        padding: 10px 15px; /* Smaller buttons on mobile */
+    }
+}

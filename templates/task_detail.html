@@ -25,6 +25,12 @@
         <div class="task-header">
             <h1>{{ task.title }}</h1>
             <p>{{ task.description }}</p>
+
+            <div class="action-buttons">
+                <a href="{{ url_for('explanation', module_id=module_id, task_id=task_id) }}" class="btn">See Explanation</a>
+                <a href="{{ url_for('solution', module_id=module_id, task_id=task_id) }}" class="btn">See Solution</a>
+                <a href="{{ url_for('open_interpreter', module_id=module_id, task_id=task_id) }}" class="btn">Open Interpreter</a>
+            </div>
         </div>
 
         <div class="task-content">

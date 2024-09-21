@@ -1,6 +1,5 @@
 from flask import Flask, render_template, abort, send_from_directory, make_response
 import json
-
 app = Flask(__name__)
 
 # Load modules from JSON file
@@ -40,16 +39,58 @@ def module_detail(module_id):
 def task_detail(module_id, task_id):
     with open('modules.json', 'r', encoding='utf-8') as f:
         modules = json.load(f)
-        
+
     # Get the specific module and task
     module = modules.get(module_id, {})
     task = module.get('tasks', {}).get(task_id, None)
-    
+
     # Check if the task exists
     if task is None:
         return "Task not found", 404
-    
-    response = make_response(render_template('task_detail.html', task=task, module=module, modules=modules))
+
+    # Ensure module_id and task_id are passed to the template
+    response = make_response(render_template('task_detail.html', task=task, module=module, module_id=module_id, task_id=task_id, modules=modules))
+    response.headers['Content-Type'] = 'text/html; charset=utf-8'
+    return response
+
+@app.route('/module/<module_id>/task/<task_id>/explanation')
+def explanation(module_id, task_id):
+    with open('modules.json', 'r', encoding='utf-8') as f:
+        modules = json.load(f)
+    module = get_module(module_id)
+    task = module.get('tasks', {}).get(task_id, None)
+    if task and 'explanation' in task:
+        explanations = task['explanation']  # Assuming explanations is a dictionary with keys for each level
+        response = make_response(render_template('explanation.html', explanations=explanations, task=task, module_id=module_id, task_id=task_id, module=module, modules=modules))
+        response.headers['Content-Type'] = 'text/html; charset=utf-8'
+        return response
+    return "Explanation not found", 404
+
+
+@app.route('/module/<module_id>/task/<task_id>/solution')
+def solution(module_id, task_id):
+    module = get_module(module_id)
+    if module:
+        task = module.get('tasks', {}).get(task_id, None)
+        if task and 'solution' in task:
+            # Pass the solution, module_id, task_id, module, and task to the template
+            response = make_response(render_template(
+                'solution.html', 
+                solution=task['solution'], 
+                module_id=module_id, 
+                task_id=task_id, 
+                module=module, 
+                task=task
+            ))
+            response.headers['Content-Type'] = 'text/html; charset=utf-8'
+            return response
+    return "Solution not found", 404
+
+
+@app.route('/module/<module_id>/task/<task_id>/interpreter')
+def open_interpreter(module_id, task_id):
+    # Render the interpreter page
+    response = make_response(render_template('interpreter.html', module_id=module_id, task_id=task_id))
     response.headers['Content-Type'] = 'text/html; charset=utf-8'
     return response
 

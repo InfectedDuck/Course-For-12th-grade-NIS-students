@@ -56,13 +56,111 @@
                     "description": "Генерирует случайное вещественное число в диапазоне от 0 до 1 (не включительно).",
                     "example": "from random import random as rnd\nprint(rnd())"
                   }
+
                 }
               }
-            },
+    },
             "task_2": {
                     "title": "Random type of application",
-                    "description": "Write a program to create a list of types of applications and output random choice."
+                    "description": "Write a program to create a list of types of applications and output random choice.",
+                    "explanation": {
+                        "beginner": {
+                            "title": "Easy Peasy Explanation",
+                            "content": [
+                                {
+                                    "tag": "concept",
+                                    "text": "In this task, we want to pick a number from a small group of numbers."
+                                },
+                                {
+                                    "tag": "analogy",
+                                    "text": "Imagine you have a box with the numbers <strong>11</strong> to <strong>20</strong> inside it."
+                                },
+                                {
+                                    "tag": "action",
+                                    "text": "We want to randomly pick one number from this box! This means we don’t know which number we will get each time we pick."
+                                },
+                                {
+                                    "tag": "example",
+                                    "text": "For example, if we reach into the box and pull out a <strong>15</strong>, that’s our random number!"
+                                },
+                                {
+                                    "tag": "tool",
+                                    "text": "To do this in a program, we can use a special tool called '<code>random</code>' that helps us choose a number without looking."
+                                }
+                            ]
+                        },
+                        "intermediate": {
+                            "title": "A Little More Detail",
+                            "content": [
+                                {
+                                    "tag": "goal",
+                                    "text": "This task requires us to generate a random integer between <strong>11</strong> and <strong>20</strong>."
+                                },
+                                {
+                                    "tag": "library",
+                                    "text": "In programming, we can use a library called '<code>random</code>' to help us achieve this."
+                                },
+                                {
+                                    "tag": "functionality",
+                                    "text": "When we call a specific function from this library, it will return a number from our specified range."
+                                },
+                                {
+                                    "tag": "note",
+                                    "text": "It’s important to note that each time we run the program, we may get a different number."
+                                },
+                                {
+                                    "tag": "example",
+                                    "text": "For example, one time it might be <strong>12</strong>, and the next it could be <strong>18</strong>."
+                                },
+                                {
+                                    "tag": "application",
+                                    "text": "This randomness is useful in games and simulations."
+                                }
+                            ]
+                        },
+                        "advanced": {
+                            "title": "Let's Dive Deeper!",
+                            "content": [
+                                {
+                                    "tag": "goal",
+                                    "text": "The goal is to output a random integer in the range <strong>[11, 20]</strong>."
+                                },
+                                {
+                                    "tag": "library",
+                                    "text": "We utilize the '<code>random</code>' library in Python, specifically the '<code>randint</code>' function, which takes two arguments: the lower and upper bounds of the range."
+                                },
+                                {
+                                    "tag": "note",
+                                    "text": "Each execution yields a potentially different result, making it ideal for applications requiring unpredictability."
+                                }
+                            ]
+                        }
             },
+            "solution": {
+        "code": "import random\n\nrandom_number = random.randint(11, 20)\nprint(random_number)",
+        "steps": [
+            {
+                "step_1": {
+      "code_line": "import random",
+      "description": "This line imports the 'random' module, which contains functions to generate random numbers. It is like opening a toolbox that has tools for randomness."
+    },
+    "step_2": {
+      "code_line": "random_number = random.randint(11, 20)",
+      "description": {
+        "random.randint(11, 20)": "This function picks a random number between 11 and 20, including both 11 and 20. It's like rolling a dice with numbers 11 to 20.",
+        "random_number": "This variable stores the randomly picked number, like putting the chosen number in a box."
+      }
+    },
+    "step_3": {
+      "code_line": "print(random_number)",
+      "description": "This prints the value stored in 'random_number' to the screen, showing which number was picked."
+    },
+    "summary": "The code picks a random number between 11 and 20 using the 'random' module and prints it out."
+}
+        ]
+    },
+     "explanation_of_code": "This section explains how the code works step by step."
+        },
             "task_3": {
                 "title": "Shuffle",
                 "description": "Write a program to shuffle numbers between 0 and 10 (not inclusive).\n\nSample Output:\n[5 7 9 0 2 3 1 6 8 4]"
