@@ -2,6 +2,11 @@ from flask import Flask, render_template, abort, send_from_directory, make_respo
 import json
 import subprocess
 import os
+import sys
+import io
+import random
+from PIL import Image, ImageDraw  # Import PIL for image processing
+import pygame  # Import Pygame
 
 app = Flask(__name__)
 
@@ -51,10 +56,18 @@ def task_detail(module_id, task_id):
     if task is None:
         return "Task not found", 404
 
+    # Pass additional data for task handling if necessary
+
     # Ensure module_id and task_id are passed to the template
-    response = make_response(render_template('task_detail.html', task=task, module=module, module_id=module_id, task_id=task_id, modules=modules))
+    response = make_response(render_template('task_detail.html', 
+                                             task=task, 
+                                             module=module, 
+                                             module_id=module_id, 
+                                             task_id=task_id,  # Pass as int for clarity
+                                             modules=modules))
     response.headers['Content-Type'] = 'text/html; charset=utf-8'
     return response
+
 
 @app.route('/module/<module_id>/task/<task_id>/explanation')
 def explanation(module_id, task_id):
@@ -90,30 +103,48 @@ def solution(module_id, task_id):
 def interpreter():
     if request.method == 'POST':
         code = request.json.get('code')
-        try:
-            # Write the code to a temporary file
-            with open('temp_script.py', 'w') as f:
-                f.write(code)
+        variables = {}  # Dictionary to store variable values
+        output = []
+        image_path = None
 
-            # Execute the code
-            result = subprocess.run(['python', 'temp_script.py'], capture_output=True, text=True)
+        try:
+            # Capture standard output
+            from io import StringIO
+
+            # Redirect stdout to capture print statements
+            old_stdout = sys.stdout
+            sys.stdout = StringIO()
+
+            # Import the necessary libraries if not already done
+            exec("import random", {}, variables)
+            exec("from PIL import Image, ImageDraw", {}, variables)
+            exec("import pygame", {}, variables)
+
+            # Execute the user's code
+            exec(code, {}, variables)
+
+            # Capture the output
+            output.append(sys.stdout.getvalue())
+            sys.stdout = old_stdout  # Restore stdout
+
+            # Handle images if created by user code
+            if 'img' in variables:  # Assuming the user creates an 'img' variable for Pillow
+                img = variables['img']
+                img.save('output_image.png')
+                image_path = 'output_image.png'
 
             return jsonify({
-                'stdout': result.stdout,
-                'stderr': result.stderr,
-                'exit_code': result.returncode
+                'output': '\n'.join(output),
+                'variables': variables,  # Return the tracked variables
+                'image': image_path  # Return the path of the generated image
             })
+
         except Exception as e:
+            sys.stdout = old_stdout  # Restore stdout
             return jsonify({'error': str(e)}), 400
 
-    # For GET requests, render the interpreter template
     return render_template('interpreter.html')
 
-
-    # Render the interpreter page
-    response = make_response(render_template('interpreter.html', module_id=module_id, task_id=task_id))
-    response.headers['Content-Type'] = 'text/html; charset=utf-8'
-    return response
 
 @app.route('/static/<path:filename>')
 def serve_static(filename):

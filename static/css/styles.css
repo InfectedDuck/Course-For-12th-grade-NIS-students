@@ -100,36 +100,41 @@ header {
 }
 
 /* Sidebar Styles */
-.sidebar {
+.sidebar, 
+.task-detail-sidebar {
     width: 250px;
     background-color: #f8bbd0; /* Slightly darker pink */
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     overflow-y: auto; /* Vertical scrollbar */
-    position: sticky; /* Sticky position for sidebar */
     top: 0; /* Align to the top */
     height: calc(100vh - 80px); /* Full height minus header */
 }
 
+.task-detail-sidebar {
+    margin-top: 50px; /* Adjust this value to create space from the top */
+}
 /* Sidebar Title */
-.sidebar h2 {
-    margin-top: 0;
+.sidebar, .task-detail-sidebar, h2 {
     font-size: 20px; /* Larger font size */
     color: #880e4f; /* Dark pink */
 }
 
 /* Sidebar List Styles */
-.sidebar ul {
+.sidebar, 
+.task-detail-sidebar, ul {
     list-style-type: none;
     padding: 0;
 }
 
-.sidebar ul li {
+.sidebar, 
+.task-detail-sidebar, ul li {
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.sidebar ul li a {
+.sidebar, 
+.task-detail-sidebar, ul li a {
     text-decoration: none;
     color: #880e4f; /* Dark pink */
     font-size: 16px; /* Adjust font size */
@@ -139,7 +144,8 @@ header {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.sidebar ul li a:hover {
+.sidebar, 
+.task-detail-sidebar, ul li a:hover {
     background-color: #e91e63; /* Different shade of pink */
     color: white;
 }
@@ -199,12 +205,14 @@ header {
         flex-direction: column;
     }
 
-    .sidebar,
+    .sidebar, 
+    .task-detail-sidebar,
     .main-content {
         width: 100%;
     }
 
-    .sidebar {
+    .sidebar, 
+    .task-detail-sidebar, {
         border-right: none; /* Remove right border on small screens */
         border-bottom: 2px solid #e3e3e3; /* Add bottom border */
     }
@@ -264,24 +272,28 @@ footer {
 }
 
 /* Sidebar styles */
-.sidebar {
+.sidebar, 
+.task-detail-sidebar {
     width: 25%; /* Adjust as needed */
     background-color: #f8f9fa; /* Light background for contrast */
     padding: 20px;
     border-right: 2px solid #e3e3e3;
 }
 
-.sidebar h2 {
+.sidebar, 
+.task-detail-sidebar, h2 {
     font-size: 1.5rem;
     margin-bottom: 15px;
 }
 
-.sidebar ul {
+.sidebar, 
+.task-detail-sidebar, ul {
     list-style: none;
     padding: 0;
 }
 
-.sidebar ul li {
+.sidebar, 
+.task-detail-sidebar, ul li {
     margin-bottom: 10px;
 }
 
@@ -302,6 +314,7 @@ footer {
 }
 
 .task-header {
+    margin-top:40px;
     margin-bottom: 20px;
 }
 
@@ -422,7 +435,8 @@ pre {
     display: flex;
 }
 
-.sidebar {
+.sidebar, 
+.task-detail-sidebar {
     width: 250px; /* Adjust width as needed */
     padding: 20px;
     background-color: #f8f9fa; /* Light background color */
@@ -430,6 +444,7 @@ pre {
 }
 
 .explanation-container {
+    margin-top:40px;
     flex: 1; /* Take up the remaining space */
     padding: 20px; /* Padding around content */
     background-color: #ffffff; /* White background for content */
@@ -556,6 +571,7 @@ code {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     margin: 20px auto;
+    margin-top:50px;
 }
 
 h1 {
@@ -639,4 +655,303 @@ pre {
     .btn {
         padding: 10px 15px; /* Smaller buttons on mobile */
     }
+}
+
+.task-icons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Create four equal columns */
+    gap: 15px; /* Space between icons */
+}
+
+.task-icon-link {
+    display: flex; /* Use flex to center content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 15px; /* Add padding for better click area */
+    background-color: #ffefff; /* Light pink background for links */
+    border: 2px solid #ff80c2; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    color: #333; /* Text color */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+    font-weight: bold; /* Make text bold */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.task-icon-link:hover {
+    background-color: #ff80c2; /* Darker pink on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.task-content {
+    width: 100%;
+    max-width: 1200px; /* Limit the width for readability */
+    padding: 20px; /* Padding for better spacing */
+    background-color: #ffffff; /* White background for content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.task-title {
+    font-size: 1.5rem; /* Adjust font size for titles */
+    color: #d81b60; /* Dark pink color */
+    margin-top: 20px; /* Space above section titles */
+}
+
+.function-name {
+    font-weight: bold; /* Bold text for function names */
+}
+
+.code-block {
+    background-color: #f4f4f4; /* Light gray background for code */
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners */
+    border-left: 4px solid #d81b60; /* Left border in dark pink */
+    overflow-x: auto; /* Horizontal scroll for long lines */
+}
+
+.examples-list {
+    margin-top: 20px; /* Space above examples list */
+}
+
+/* General Styling for the Task Content */
+.task-content {
+    background-color: #fdf9f9;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Task Title and Description */
+.task-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.task-description {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Overview Section */
+.overview-section h3,
+.drawing-shapes-section h3,
+.event-handling-section h3,
+.best-practices-section h3,
+.resources-section h3,
+.theory-section h3,
+.explanation-section h3 {
+    font-size: 22px;
+    color: #b63d71;
+    border-bottom: 2px solid #b63d71;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+/* Definition and Explanation Text */
+.definition,
+.explanation {
+    font-size: 16px;
+    font-style: italic;
+    color: #444;
+}
+
+/* Features and Benefits Lists */
+.features-list, .benefits-list,
+.key-points-list, .tips-list {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #555;
+    font-size: 16px;
+}
+
+.features-list li, .benefits-list li,
+.key-points-list li, .tips-list li {
+    margin-bottom: 8px;
+}
+
+/* Drawing Shapes Section */
+.drawing-shapes-section .code-block,
+.event-handling-section .code-block {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-left: 4px solid #b63d71;
+    overflow-x: auto;
+    font-family: monospace;
+    color: #333;
+}
+
+/* Resource Links */
+.resources-list {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.resources-list li a {
+    text-decoration: none;
+    color: #b63d71;
+    font-weight: 500;
+}
+
+.resources-list li a:hover {
+    text-decoration: underline;
+}
+
+/* Theory Section */
+.theory-section h4 {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.theory-section .key-points-list {
+    list-style-type: decimal;
+}
+
+/* Explanation Levels */
+.explanation-section h4 {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+/* Explanation Content Lists */
+.beginner-content, .intermediate-content, .advanced-content {
+    list-style-type: circle;
+    margin-left: 20px;
+}
+
+.beginner-content li, .intermediate-content li, .advanced-content li {
+    margin-bottom: 10px;
+}
+
+/* Module-Specific Styling */
+.module-4 {
+    border-left: 4px solid #b63d71;
+    background-color: #fdf0f4;
+}
+
+.module-5 {
+    border-left: 4px solid #6d9f71;
+    background-color: #f0f9f4;
+}
+
+.module-5-task5 {
+    border-left: 4px solid #6d9f71;
+    background-color: #f0f9f4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .task-content {
+        padding: 15px;
+    }
+
+    .task-title {
+        font-size: 20px;
+    }
+
+    .task-description {
+        font-size: 16px;
+    }
+
+    .overview-section h3, 
+    .drawing-shapes-section h3, 
+    .event-handling-section h3, 
+    .best-practices-section h3, 
+    .resources-section h3, 
+    .theory-section h3, 
+    .explanation-section h3 {
+        font-size: 18px;
+    }
+}
+
+.interpreter-container {
+    background-color: #ffe6f2; /* Light pink background */
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.interpreter-title {
+    color: #d1006e; /* Dark pink */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navigation-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navigation-buttons .btn {
+    margin: 0 10px;
+}
+
+.code-area {
+    width: 100%;
+    border: 2px solid #d1006e; /* Dark pink */
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.output-title, .tracked-vars-title, .image-output-title {
+    color: #d1006e; /* Dark pink */
+    margin-top: 20px;
+}
+
+.output-area {
+    border: 2px solid #d1006e; /* Dark pink */
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+    white-space: pre-wrap; /* Ensures that whitespaces are preserved */
+}
+
+.output-image {
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #d1006e; /* Dark pink */
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #d1006e; /* Dark pink */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px auto;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #a8004e; /* Darker pink */
+}
+
+.btn-secondary {
+    background-color: #ffe6f2; /* Light pink */
+    color: #d1006e; /* Dark pink */
+    border: 2px solid #d1006e; /* Dark pink */
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #d1006e; /* Dark pink */
+    color: white;
 }

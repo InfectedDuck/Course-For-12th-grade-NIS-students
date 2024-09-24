@@ -3,7 +3,7 @@
 {% block title %}Explanation for {{ task.title }}{% endblock %}
 
 {% block content %}
-<div class="task-detail-container">
+<div class="task-detail-container d-flex">
     <aside class="sidebar">
         <h2>Modules</h2>
         <ul>
@@ -21,7 +21,7 @@
         </ul>
     </aside>
 
-    <div class="explanation-container">
+    <div class="explanation-container flex-grow-1">
         <h1>{{ task.title }} - Explanation</h1>
 
         <div class="buttons">
