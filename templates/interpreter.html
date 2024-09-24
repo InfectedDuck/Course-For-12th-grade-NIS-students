@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}Advanced Python Interpreter{% endblock %}
+
+{% block content %}
+<div class="interpreter-container">
+    <h1>Online Python Interpreter</h1>
+    
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons">
+        <a href="/modules/1" class="btn btn-secondary">Modules</a>
+        <a href="/index" class="btn btn-secondary">Home</a>
+    </div>
+    
+    <textarea id="code" rows="10" cols="50" placeholder="Write your Python code here..."></textarea><br>
+    <button id="run-btn" class="btn btn-primary">Run Code</button>
+
+    <h2>Output:</h2>
+    <pre id="output" class="border p-2"></pre>
+
+    <h2>Tracked Variables:</h2>
+    <pre id="variables" class="border p-2"></pre>
+
+    <h2>Image Output:</h2>
+    <img id="output-image" src="" alt="Output Image" style="display:none; max-width: 100%;">
+</div>
+
+<!-- CodeMirror CSS and JS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+
+<script>
+    // Initialize CodeMirror
+    const editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+        lineNumbers: true,
+        mode: "python",
+        theme: "default",
+        indentWithTabs: true,
+        tabSize: 4,
+        extraKeys: {
+            "Enter": function(cm) {
+                const cursor = cm.getCursor();
+                const line = cm.getLine(cursor.line);
+                const trimmedLine = line.trim();
+
+                if (trimmedLine.endsWith(':')) {
+                    cm.replaceRange('\n' + ' '.repeat(4), cursor);
+                    cm.setCursor(cursor.line + 1, 4);
+                } else {
+                    cm.replaceRange('\n' + line.match(/^\s*/)[0], cursor);
+                    cm.setCursor(cursor.line + 1, line.match(/^\s*/)[0].length);
+                }
+            },
+            "Shift-Enter": function(cm) {
+                const code = cm.getValue();
+                executeCode(code);
+            },
+            "Tab": function(cm) {
+                cm.replaceSelection('    '); // Add 4 spaces for tab
+            },
+            "Ctrl-Space": "autocomplete" // Trigger autocompletion if implemented
+        }
+    });
+
+    // Function to execute code
+    function executeCode(code) {
+        fetch('/interpreter', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ code: code })
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => { throw new Error(err.error); });
+            }
+            return response.json();
+        })
+        .then(data => {
+            const outputElement = document.getElementById('output');
+            outputElement.textContent = data.output || '';
+
+            // Display tracked variables
+            const variablesElement = document.getElementById('variables');
+            variablesElement.textContent = JSON.stringify(data.variables, null, 2) || 'No variables tracked.';
+
+            // Check if there's an image to display
+            if (data.image) {
+                const imgElement = document.getElementById('output-image');
+                imgElement.src = data.image; // Set the source to the image path
+                imgElement.style.display = 'block'; // Make the image visible
+            } else {
+                document.getElementById('output-image').style.display = 'none'; // Hide image if not present
+            }
+
+            if (data.stderr) {
+                outputElement.textContent += '\nError:\n' + data.stderr;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error.message);
+            document.getElementById('output').textContent = 'Error: ' + error.message;
+        });
+    }
+
+    // Run code button functionality
+    document.getElementById('run-btn').addEventListener('click', function() {
+        const code = editor.getValue();
+        executeCode(code);
+    });
+</script>
+{% endblock %}

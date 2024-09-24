@@ -32,4 +32,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error loading tasks:', error);
             });
     }
+    const taskIcons = document.querySelector('.task-icons');
+    const prevButton = document.querySelector('.prev');
+    const nextButton = document.querySelector('.next');
+
+    let scrollAmount = 0;
+
+    nextButton.addEventListener('click', () => {
+        scrollAmount += 100; // Adjust the scroll amount
+        taskIcons.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    prevButton.addEventListener('click', () => {
+        scrollAmount -= 100; // Adjust the scroll amount
+        taskIcons.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+    });
 });

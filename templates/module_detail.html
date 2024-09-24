@@ -22,19 +22,21 @@
                 <h1>{{ module.title }}</h1>
                 <div class="task-icons">
                     {% for task_id, task in module.tasks.items() %}
-                        <a href="#task{{ task_id }}" class="task-icon-link">
-                            <img src="{{ url_for('serve_static', filename='images/' + task.image) }}" alt="{{ task.title }}" class="task-icon">
+                        <a href="{{ url_for('task_detail', module_id=module_id, task_id=task_id) }}" class="task-icon-link">
+                            <span class="task-icon">{{ task.title }}</span>
                         </a>
                     {% endfor %}
                 </div>
-                <div class="task-content">
-                    {% for task_id, task in module.tasks.items() %}
-                        <div id="task{{ task_id }}" class="task">
-                            <h2>{{ task.title }}</h2>
-                            <p>{{ task.description }}</p>
-                        </div>
-                    {% endfor %}
-                </div>
+            </div>
+            
+
+            <div class="task-content">
+                {% for task_id, task in module.tasks.items() %}
+                    <div id="task{{ task_id }}" class="task">
+                        <h2>{{ task.title }}</h2>
+                        <p>{{ task.description }}</p>
+                    </div>
+                {% endfor %}
             </div>
         </main>
     </div>

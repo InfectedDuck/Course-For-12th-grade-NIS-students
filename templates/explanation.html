@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Explanation for {{ task.title }}{% endblock %}
+
+{% block content %}
+<div class="task-detail-container d-flex">
+    <aside class="sidebar">
+        <h2>Modules</h2>
+        <ul>
+            {% if modules %}
+                {% for module_id, module in modules.items() %}
+                    <li>
+                        <a href="{{ url_for('module_detail', module_id=module_id) }}" class="module-link">
+                            {{ module.title }}
+                        </a>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>No modules available</li>
+            {% endif %}
+        </ul>
+    </aside>
+
+    <div class="explanation-container flex-grow-1">
+        <h1>{{ task.title }} - Explanation</h1>
+
+        <div class="buttons">
+            <button onclick="showExplanation('beginner')" class="explanation-btn">Easy Peasy!</button>
+            <button onclick="showExplanation('intermediate')" class="explanation-btn">A Little More Detail</button>
+            <button onclick="showExplanation('advanced')" class="explanation-btn">Let's Dive Deeper!</button>
+        </div>
+
+        <div id="explanation-content">
+            <div id="beginner" class="explanation" style="display: none;">
+                <h2>{{ explanations.beginner.title }}</h2>
+                <div class="explanation-details">
+                    {% for item in explanations.beginner.content %}
+                        <p class="{{ item.tag }}">{{ item.text }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="intermediate" class="explanation" style="display: none;">
+                <h2>{{ explanations.intermediate.title }}</h2>
+                <div class="explanation-details">
+                    {% for item in explanations.intermediate.content %}
+                        <p class="{{ item.tag }}">{{ item.text }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div id="advanced" class="explanation" style="display: none;">
+                <h2>{{ explanations.advanced.title }}</h2>
+                <div class="explanation-details">
+                    {% for item in explanations.advanced.content %}
+                        <p class="{{ item.tag }}">{{ item.text }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <a href="{{ url_for('task_detail', module_id=module_id, task_id=task_id) }}" class="btn">Back to Task</a>
+            <a href="{{ url_for('solution', module_id=module_id, task_id=task_id) }}" class="btn">View Solution</a>
+            <a href="{{ url_for('interpreter', module_id=module_id, task_id=task_id) }}" class="btn">Open Interpreter</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showExplanation(level) {
+        // Hide all explanations
+        document.querySelectorAll('.explanation').forEach(function(el) {
+            el.style.display = 'none';
+        });
+        // Show the selected explanation
+        document.getElementById(level).style.display = 'block';
+    }
+</script>
+{% endblock %}

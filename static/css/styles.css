@@ -12,7 +12,7 @@ body {
 /* Header Styles */
 header {
     background-color: #f8bbd0; /* Slightly darker pink */
-    padding: 10px 20px;
+    padding: 10px; /* Reduced padding */
     border-bottom: 2px solid #880e4f; /* Dark pink border */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     position: fixed; /* Fixed position for header */
@@ -20,6 +20,10 @@ header {
     top: 0; /* Align to the top */
     left: 0; /* Align to the left */
     z-index: 1000; /* Ensure header is above other content */
+}
+
+/* Header Container */
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,7 +32,7 @@ header {
 /* Header Title */
 .header-container h1 {
     margin: 0;
-    font-size: 24px; /* Adjust font size */
+    font-size: 20px; /* Adjust font size */
 }
 
 .header-container h1 a {
@@ -36,42 +40,55 @@ header {
     color: #880e4f; /* Dark pink */
 }
 
-.header-container h1 a:hover {
-    text-decoration: underline;
-}
-
-/* Task Icons in Header */
-.task-icons {
-    display: flex;
-    align-items: center;
-}
-
-.task-icon-link {
-    display: inline-block;
-    margin: 0 5px;
-}
-
-.task-icon {
-    width: 40px; /* Adjust size as needed */
-    height: 40px; /* Adjust size as needed */
-    object-fit: cover;
-    border-radius: 5px; /* Rounded corners */
-    transition: opacity 0.3s ease;
-}
-
-.task-icon-link:hover .task-icon {
-    opacity: 0.8; /* Slight fade effect on hover */
-}
-
-/* Auth Links in Header */
-.header-container .auth-links a {
+/* Auth Links */
+.auth-links a {
     text-decoration: none;
     color: #880e4f; /* Dark pink */
     margin-left: 15px;
 }
 
-.header-container .auth-links a:hover {
+.auth-links a:hover {
     text-decoration: underline;
+}
+
+/* Task Carousel */
+.task-carousel {
+    display: flex;
+    align-items: center;
+    overflow: hidden; /* Hide overflow for carousel effect */
+    margin-top: 10px; /* Space between header and carousel */
+}
+
+.task-nav {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.task-icons {
+    display: flex;
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping */
+    margin: 0 10px; /* Spacing around task icons */
+}
+
+.task-icon-link {
+    display: inline-block;
+    margin: 0 5px; /* Spacing between icons */
+}
+
+.prev, .next {
+    background-color: #e91e63; /* Button color */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.prev:hover, .next:hover {
+    background-color: #880e4f; /* Dark pink on hover */
 }
 
 /* Container for Sidebar and Main Content */
@@ -89,7 +106,6 @@ header {
     padding: 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     overflow-y: auto; /* Vertical scrollbar */
-    position: sticky; /* Sticky position for sidebar */
     top: 0; /* Align to the top */
     height: calc(100vh - 80px); /* Full height minus header */
 }
@@ -152,31 +168,6 @@ header {
     color: #880e4f; /* Dark pink */
 }
 
-.task-nav {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    margin-top: 10px;
-    width: 100%;
-    padding: 0 20px;
-}
-
-.task-nav a {
-    text-decoration: none;
-    background-color: #e91e63; /* Different shade of pink */
-    color: white;
-    padding: 12px 24px;
-    border-radius: 8px;
-    margin-right: 10px;
-    display: inline-block;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-}
-
-.task-nav a:hover {
-    background-color: #880e4f; /* Dark pink on hover */
-}
-
 .task-content {
     width: 100%;
     max-width: 1200px; /* Limit the width for readability */
@@ -199,6 +190,23 @@ header {
 
 .task p {
     margin: 10px 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .task-detail-container {
+        flex-direction: column;
+    }
+
+    .sidebar,
+    .main-content {
+        width: 100%;
+    }
+
+    .sidebar {
+        border-right: none; /* Remove right border on small screens */
+        border-bottom: 2px solid #e3e3e3; /* Add bottom border */
+    }
 }
 
 /* Footer Styles */
@@ -246,4 +254,603 @@ footer {
 
 .task-footer-link:hover {
     background-color: #880e4f; /* Dark pink on hover */
+}
+
+/* Task Detail Container */
+.task-detail-container {
+    display: flex;
+    margin: 20px;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 25%; /* Adjust as needed */
+    background-color: #f8f9fa; /* Light background for contrast */
+    padding: 20px;
+    border-right: 2px solid #e3e3e3;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.module-link {
+    text-decoration: none;
+    color: #ff4081; /* Pink color for links */
+    transition: color 0.3s;
+}
+
+.module-link:hover {
+    color: #d5006d; /* Darker pink on hover */
+}
+
+/* Main content styles */
+.main-content {
+    width: 75%; /* Adjust as needed */
+    padding: 20px;
+}
+
+.task-header {
+    margin-bottom: 20px;
+}
+
+.task-header h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.task-header p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+/* Task content styles */
+.task-content h2 {
+    font-size: 1.5rem;
+    margin-top: 20px;
+    color: #ff4081; /* Pink color for section titles */
+}
+
+.task-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.task-content code {
+    display: block;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-left: 4px solid #ff4081; /* Pink left border */
+    margin: 10px 0;
+}
+
+/* Task Header Styles */
+.task-header {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #ffeef8; /* Light pink background for the header */
+    border: 1px solid #d81b60; /* Dark pink border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.task-header h1 {
+    font-size: 2rem; /* Larger font size */
+    color: #880e4f; /* Dark pink color */
+    margin-bottom: 10px;
+}
+
+.task-header p {
+    font-size: 1.1rem; /* Slightly larger font size */
+    color: #555; /* Dark gray for better readability */
+    line-height: 1.6; /* Better line spacing */
+}
+
+/* Task Content Styles */
+.task-content {
+    padding: 20px;
+    background-color: #fff; /* White background for content */
+    border-radius: 8px; /* Rounded corners */
+    border: 1px solid #e0e0e0; /* Light border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    margin-top: 20px; /* Space between header and content */
+}
+
+.task-content h2 {
+    font-size: 1.5rem; /* Larger font size for section titles */
+    color: #d81b60; /* Dark pink color */
+    margin-top: 20px; /* Space above section titles */
+}
+
+.task-content p {
+    font-size: 1rem; /* Regular font size for paragraph text */
+    color: #333; /* Dark gray color for readability */
+    line-height: 1.6; /* Improved line spacing */
+}
+
+/* Code Block Styles */
+pre {
+    background-color: #f4f4f4; /* Light gray background for code */
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners */
+    border-left: 4px solid #d81b60; /* Left border in dark pink */
+    overflow-x: auto; /* Horizontal scroll for long lines */
+}
+
+/* List Styles */
+.task-content ul {
+    padding-left: 20px; /* Indent list items */
+}
+
+.task-content ul li {
+    margin-bottom: 10px; /* Space between list items */
+}
+
+* Button Styles */
+.task-buttons {
+    margin-top: 20px; /* Space above buttons */
+    display: flex;
+    gap: 10px; /* Space between buttons */
+}
+
+.btn {
+    background-color: #e91e63; /* Button background color */
+    color: white; /* Button text color */
+    padding: 10px 20px; /* Padding for the button */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    font-weight: bold; /* Bold text */
+    transition: background-color 0.3s ease; /* Transition effect */
+}
+
+.btn:hover {
+    background-color: #880e4f; /* Darker shade on hover */
+}
+.task-detail-container {
+    display: flex;
+}
+
+.sidebar {
+    width: 250px; /* Adjust width as needed */
+    padding: 20px;
+    background-color: #f8f9fa; /* Light background color */
+    border-right: 1px solid #ddd; /* Light border on the right */
+}
+
+.explanation-container {
+    flex: 1; /* Take up the remaining space */
+    padding: 20px; /* Padding around content */
+    background-color: #ffffff; /* White background for content */
+}
+
+h1 {
+    margin-top: 0; /* Remove default margin for h1 */
+}
+
+.buttons {
+    margin-bottom: 20px; /* Space below buttons */
+}
+
+.explanation-btn {
+    margin-right: 10px; /* Space between buttons */
+    padding: 10px 15px; /* Padding for buttons */
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white;
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.explanation-btn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.explanation {
+    margin-top: 20px; /* Space above explanations */
+}
+
+.explanation h2 {
+    margin-bottom: 10px; /* Space below h2 */
+}
+
+/* General Styles */
+.explanation-container {
+    padding: 20px;
+    background-color: #fff; /* White background for contrast */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Title Styles */
+.explanation-container h1 {
+    font-size: 2.5rem; /* Larger title */
+    color: #880e4f; /* Dark pink color */
+    margin-bottom: 20px; /* Space below title */
+    text-align: center; /* Centered title */
+}
+
+/* Button Styles */
+.buttons {
+    display: flex;
+    justify-content: center; /* Center buttons */
+    gap: 15px; /* Space between buttons */
+    margin-bottom: 30px; /* Space below buttons */
+}
+
+.explanation-btn {
+    padding: 12px 20px; /* Padding for buttons */
+    background-color: #e91e63; /* Button color */
+    color: white; /* Text color */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s; /* Transition effects */
+    font-weight: bold; /* Bold text */
+}
+
+.explanation-btn:hover {
+    background-color: #880e4f; /* Darker pink on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+/* Explanation Section Styles */
+.explanation {
+    margin-bottom: 20px; /* Space below each explanation */
+    padding: 15px; /* Padding around explanations */
+    background-color: #fce4ec; /* Light pink background */
+    border-left: 5px solid #d81b60; /* Dark pink left border */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Explanation Title Styles */
+.explanation h2 {
+    font-size: 1.8rem; /* Section title size */
+    color: #d81b60; /* Dark pink */
+    margin-bottom: 10px; /* Space below section title */
+}
+
+/* Text Styles */
+.explanation p {
+    font-size: 1rem; /* Regular font size */
+    color: #333; /* Dark gray */
+    line-height: 1.6; /* Improved line spacing */
+    margin: 10px 0; /* Margin above and below paragraphs */
+}
+
+/* Highlighted Text */
+strong {
+    color: #ff4081; /* Highlighted text color */
+}
+
+code {
+    background-color: #f4f4f4; /* Light gray background for code */
+    padding: 2px 5px; /* Padding around code */
+    border-radius: 3px; /* Rounded corners */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 10px; /* Reduce gap between buttons */
+    }
+}
+
+.solution-container {
+    padding: 30px;
+    background-color: #fff; /* White background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #d5006d; /* Accent color for headings */
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin: 20px 0 10px;
+    border-bottom: 2px solid #d5006d; /* Underline for emphasis */
+    padding-bottom: 5px;
+}
+
+.solution-code {
+    background-color: #eef; /* Light background for code section */
+    padding: 15px;
+    border-radius: 5px;
+    overflow: auto;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font for code */
+    font-size: 1em;
+    line-height: 1.5;
+    border: 1px solid #d5006d; /* Border to define the code area */
+}
+
+pre {
+    margin: 0; /* Remove default margin */
+}
+
+.solution-steps {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9; /* Slightly grey background */
+    border-radius: 5px;
+    border: 1px solid #ccc; /* Light border */
+}
+
+.solution-steps ol {
+    margin-left: 20px; /* Indent for ordered list */
+}
+
+.navigation-buttons {
+    display: flex;
+    justify-content: center; /* Center the buttons */
+    margin-top: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 0 10px;
+    background-color: #d5006d; /* Button color */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    font-size: 1em;
+}
+
+.btn:hover {
+    background-color: #b0004d; /* Darker shade on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+@media (max-width: 600px) {
+    .solution-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2em; /* Responsive font size */
+    }
+
+    h2 {
+        font-size: 1.5em; /* Responsive font size */
+    }
+
+    .btn {
+        padding: 10px 15px; /* Smaller buttons on mobile */
+    }
+}
+
+.task-icons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Create four equal columns */
+    gap: 15px; /* Space between icons */
+}
+
+.task-icon-link {
+    display: flex; /* Use flex to center content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    padding: 15px; /* Add padding for better click area */
+    background-color: #ffefff; /* Light pink background for links */
+    border: 2px solid #ff80c2; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+    color: #333; /* Text color */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth transitions */
+    font-weight: bold; /* Make text bold */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.task-icon-link:hover {
+    background-color: #ff80c2; /* Darker pink on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.task-content {
+    width: 100%;
+    max-width: 1200px; /* Limit the width for readability */
+    padding: 20px; /* Padding for better spacing */
+    background-color: #ffffff; /* White background for content */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.task-title {
+    font-size: 1.5rem; /* Adjust font size for titles */
+    color: #d81b60; /* Dark pink color */
+    margin-top: 20px; /* Space above section titles */
+}
+
+.function-name {
+    font-weight: bold; /* Bold text for function names */
+}
+
+.code-block {
+    background-color: #f4f4f4; /* Light gray background for code */
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners */
+    border-left: 4px solid #d81b60; /* Left border in dark pink */
+    overflow-x: auto; /* Horizontal scroll for long lines */
+}
+
+.examples-list {
+    margin-top: 20px; /* Space above examples list */
+}
+
+/* General Styling for the Task Content */
+.task-content {
+    background-color: #fdf9f9;
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Task Title and Description */
+.task-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.task-description {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Overview Section */
+.overview-section h3,
+.drawing-shapes-section h3,
+.event-handling-section h3,
+.best-practices-section h3,
+.resources-section h3,
+.theory-section h3,
+.explanation-section h3 {
+    font-size: 22px;
+    color: #b63d71;
+    border-bottom: 2px solid #b63d71;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+/* Definition and Explanation Text */
+.definition,
+.explanation {
+    font-size: 16px;
+    font-style: italic;
+    color: #444;
+}
+
+/* Features and Benefits Lists */
+.features-list, .benefits-list,
+.key-points-list, .tips-list {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #555;
+    font-size: 16px;
+}
+
+.features-list li, .benefits-list li,
+.key-points-list li, .tips-list li {
+    margin-bottom: 8px;
+}
+
+/* Drawing Shapes Section */
+.drawing-shapes-section .code-block,
+.event-handling-section .code-block {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-left: 4px solid #b63d71;
+    overflow-x: auto;
+    font-family: monospace;
+    color: #333;
+}
+
+/* Resource Links */
+.resources-list {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.resources-list li a {
+    text-decoration: none;
+    color: #b63d71;
+    font-weight: 500;
+}
+
+.resources-list li a:hover {
+    text-decoration: underline;
+}
+
+/* Theory Section */
+.theory-section h4 {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.theory-section .key-points-list {
+    list-style-type: decimal;
+}
+
+/* Explanation Levels */
+.explanation-section h4 {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+/* Explanation Content Lists */
+.beginner-content, .intermediate-content, .advanced-content {
+    list-style-type: circle;
+    margin-left: 20px;
+}
+
+.beginner-content li, .intermediate-content li, .advanced-content li {
+    margin-bottom: 10px;
+}
+
+/* Module-Specific Styling */
+.module-4 {
+    border-left: 4px solid #b63d71;
+    background-color: #fdf0f4;
+}
+
+.module-5 {
+    border-left: 4px solid #6d9f71;
+    background-color: #f0f9f4;
+}
+
+.module-5-task5 {
+    border-left: 4px solid #6d9f71;
+    background-color: #f0f9f4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .task-content {
+        padding: 15px;
+    }
+
+    .task-title {
+        font-size: 20px;
+    }
+
+    .task-description {
+        font-size: 16px;
+    }
+
+    .overview-section h3, 
+    .drawing-shapes-section h3, 
+    .event-handling-section h3, 
+    .best-practices-section h3, 
+    .resources-section h3, 
+    .theory-section h3, 
+    .explanation-section h3 {
+        font-size: 18px;
+    }
 }

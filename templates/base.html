@@ -6,26 +6,56 @@
     <title>{% block title %}My Course Site{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('serve_static', filename='css/styles.css') }}">
     <script src="{{ url_for('serve_static', filename='js/module.js') }}" defer></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+
     {% block head %}{% endblock %}
 </head>
 <body>
     <header>
         <div class="header-container">
             <h1><a href="{{ url_for('home') }}">My Course Site</a></h1>
-            <div class="task-icons">
-                {% for task_id, task in module.tasks.items() %}
-                    <a href="#task{{ task_id }}" class="task-icon-link">
-                        <img src="{{ url_for('serve_static', filename='images/terminal.png') }}" alt="{{ task.title }}" class="task-icon">
-                    </a>
-                {% endfor %}
+
+            {% if module and module.tasks %}
+            <div id="taskCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    {% for task_id, task in module.tasks.items() %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <a href="{{ url_for('task_detail', module_id=module_id, task_id=task_id) }}" class="task-icon-link">
+                            {{ task.title }}
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#taskCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#taskCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
+            {% endif %}
+
             <div class="auth-links">
                 <a href="/login">Login</a> | <a href="/register">Register</a>
             </div>
         </div>
     </header>
+
     <main>
         {% block content %}{% endblock %}
     </main>
+
+    <footer>
+        <p>&copy; 2024 My Course Site. All rights reserved.</p>
+    </footer>
+
 </body>
 </html>

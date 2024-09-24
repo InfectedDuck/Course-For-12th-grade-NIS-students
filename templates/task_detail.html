@@ -1,0 +1,477 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ task.title }} - My Course Site{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+<div class="task-detail-container">
+    <aside class="sidebar">
+        <h2>Modules</h2>
+        <ul>
+            {% if modules %}
+                {% for module_id, module in modules.items() %}
+                    <li>
+                        <a href="{{ url_for('module_detail', module_id=module_id) }}" class="module-link">
+                            {{ module.title | default('Unnamed Module') }}
+                        </a>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <li>No modules available</li>
+            {% endif %}
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <div class="task-header">
+            <h1>{{ task.title | default('Untitled Task') }}</h1>
+            <p>{{ task.description | default('No description available.') }}</p>
+
+            {% if task.type != 'theoretical' %}
+            <div class="action-buttons">
+                <a href="{{ url_for('explanation', module_id=module_id, task_id=task_id) }}" class="btn">See Explanation</a>
+                <a href="{{ url_for('solution', module_id=module_id, task_id=task_id) }}" class="btn">See Solution</a>
+                <button id="open-interpreter-btn" class="btn">Open Interpreter</button>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="task-content">
+            {% if task_id == "task_1" and module_id=="1"%}
+            <div class="task-content">
+                <h2 class="task-title">Overview</h2>
+                <p class="task-description">{{ task.content.overview }}</p>
+        
+                <h2 class="task-title">Module Structure</h2>
+                <pre class="code-block"><code>{{ task.content.structure.example }}</code></pre>
+        
+                <h2 class="task-title">Functions</h2>
+                <div class="functions-list">
+                    {% for function_name, function_info in task.content.functions.items() %}
+                        <h3 class="function-name">{{ function_name | title }}</h3>
+                        <p class="function-description">{{ function_info.description }}</p>
+                        <pre class="code-block"><code>{{ function_info.example }}</code></pre>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        
+        {% if task_id == "task_14" and module_id=="1"%}
+            <div class="task-content">
+                <h2 class="task-title">{{ task.title }}</h2>
+                <p class="task-description">{{ task.description }}</p>
+        
+                <h3 class="functions-header">Functions in the Math Module</h3>
+                <ul class="functions-list">
+                    {% for function_name, function in task.functions.items() %}
+                        <li class="function-item">
+                            <strong class="function-name">{{ function_name | default('Unnamed Function') }}</strong>: {{ function.description | default('No description available.') }}
+                            <br>
+                            {% if function.example %}
+                                <pre class="code-block"><code>{{ function.example.code | default('No code provided.') }}</code></pre>
+                                <p><strong>Output:</strong> {{ function.example.output | default('No output provided.') }}</p>
+                            {% endif %}
+                            {% if function.examples %}
+                                <h4 class="additional-examples-header">Additional Examples:</h4>
+                                <ul class="additional-examples-list">
+                                    {% for example in function.examples %}
+                                        <li class="example-item">
+                                            <pre class="code-block"><code>{{ example.code | default('No code provided.') }}</code></pre>
+                                            <p><strong>Output:</strong> {{ example.output | default('No output provided.') }}</p>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                            {% if function.note %}
+                                <p class="function-note"><strong>Note:</strong> {{ function.note }}</p>
+                            {% endif %}
+                            {% if function.reference %}
+                                <p class="function-reference"><strong>Reference:</strong> {{ function.reference }}</p>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        
+        {% if task_id == "task_15" and module_id=="1" %}
+            <div class="task-content">
+                <h2 class="examples-header">Examples</h2>
+                <div class="examples-list">
+                    {% for example in task.examples %}
+                        <h3 class="example-title">{{ example.title }}</h3>
+                        <h4 class="example-code-header">Code:</h4>
+                        <pre class="code-block">
+                        <code>
+                        {% for line in example.code %}
+                        {{ line }}
+                        {% endfor %}
+                        </code>
+                        </pre>
+                        <h4 class="example-output-header">Output:</h4>
+                        <pre class="code-block">
+                        <code>
+                        {% for line in example.output %}
+                        {{ line }}
+                        {% endfor %}
+                        </code>
+                        </pre>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        {% if task_id == "task_1" and module_id=="2"%}
+        <div class="task-content">
+            <h2 class="task-title">{{ task.title }}</h2>
+            <p class="task-description">{{ task.description }}</p>
+            <a href="{{ task.learning_topic }}" target="_blank">Learning Topic</a>
+            <p><strong>Note:</strong> {{ task.note }}</p>
+    
+            <h3>Key Features</h3>
+            <ul>
+                {% for feature in task.key_features %}
+                    <li>{{ feature }}</li>
+                {% endfor %}
+            </ul>
+    
+            <h3>Common Methods</h3>
+            <div class="methods-list">
+                {% for method, description in task.common_methods.items() %}
+                    <h4 class="method-name">{{ method }}</h4>
+                    <p class="method-description">{{ description }}</p>
+                {% endfor %}
+            </div>
+    
+            <h3>Examples</h3>
+            <div class="examples-list">
+                {% for example in task.examples %}
+                    <h4 class="example-title">{{ example.title }}</h4>
+                    <pre class="code-block"><code>{{ example.code | join('\n') }}</code></pre>
+                    <p class="example-output"><strong>Output:</strong> {{ example.output }}</p>
+                {% endfor %}
+            </div>
+    
+            <p><em>{{ task.reference }}</em></p>
+        </div>
+    {% endif %}
+    
+        {% if task_id == "task_1" and module_id=="3"%}
+    <div class="task-content">
+        {% for section in task.sections %}
+            <h2 class="task-title">{{ section.heading }}</h2>
+            {% for content in section.content %}
+                {% if content.definition %}
+                    <p class="task-description">{{ content.definition }}</p>
+                {% endif %}
+                {% if content.structure %}
+                    <p class="task-description">{{ content.structure }}</p>
+                {% endif %}
+                {% if content.library_overview %}
+                    <p class="task-description">{{ content.library_overview }}</p>
+                {% endif %}
+                {% if content.key_functions %}
+                    <div class="functions-list">
+                        {% for function in content.key_functions %}
+                            <h3 class="function-name">{{ function.function | title }}</h3>
+                            <p class="function-description">{{ function.description }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if content.applications %}
+                    <p class="task-description">{{ content.applications }}</p>
+                {% endif %}
+                {% if content.real_world_examples %}
+                    <div class="real-world-examples">
+                        {% for example in content.real_world_examples %}
+                            <h4 class="example-title">{{ example.example }}</h4>
+                            <p class="example-description">{{ example.description }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if content.basic_task %}
+                    <p class="task-description">{{ content.basic_task }}</p>
+                {% endif %}
+                {% if content.intermediate_challenge %}
+                    <p class="task-description">{{ content.intermediate_challenge }}</p>
+                {% endif %}
+                {% if content.advanced_project %}
+                    <p class="task-description">{{ content.advanced_project }}</p>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endif %}
+{% if task_id == "task_1" and module_id=="4"%}
+    <div class="task-content module-4">
+        <h2 class="task-title">{{ task.title }}</h2>
+        <p class="task-description">{{ task.description }}</p>
+
+        <section class="overview-section">
+            <h3>Overview</h3>
+            <p class="definition"><strong>Definition:</strong> {{ task.content.overview.definition }}</p>
+            <h4>Features</h4>
+            <ul class="features-list">
+                {% for feature in task.content.overview.features %}
+                    <li>{{ feature }}</li>
+                {% endfor %}
+            </ul>
+            <h4>Benefits</h4>
+            <ul class="benefits-list">
+                {% for benefit in task.content.overview.benefits %}
+                    <li>{{ benefit }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="drawing-shapes-section">
+            <h3>Drawing Shapes</h3>
+            <p><strong>Concept:</strong> {{ task.content.drawing_shapes.concept }}</p>
+            <h4>Example Code</h4>
+            <pre class="code-block"><code>{{ task.content.drawing_shapes.example_code }}</code></pre>
+            <p class="explanation"><strong>Explanation:</strong> {{ task.content.drawing_shapes.explanation }}</p>
+        </section>
+
+        <section class="event-handling-section">
+            <h3>Event Handling</h3>
+            <p><strong>Concept:</strong> {{ task.content.event_handling.concept }}</p>
+            <h4>Example Code</h4>
+            <pre class="code-block"><code>{{ task.content.event_handling.example_code }}</code></pre>
+            <p class="explanation"><strong>Explanation:</strong> {{ task.content.event_handling.explanation }}</p>
+        </section>
+
+        <section class="best-practices-section">
+            <h3>Best Practices</h3>
+            <h4>Tips</h4>
+            <ul class="tips-list">
+                {% for tip in task.content.best_practices.tips %}
+                    <li>{{ tip }}</li>
+                {% endfor %}
+            </ul>
+            <p class="next-steps"><strong>Next Steps:</strong> {{ task.content.best_practices.next_steps }}</p>
+        </section>
+
+        <section class="resources-section">
+            <h3>Resources</h3>
+            <p><strong>Official Documentation:</strong> <a href="{{ task.content.resources.official_documentation }}" target="_blank">{{ task.content.resources.official_documentation }}</a></p>
+            <h4>Tutorials</h4>
+            <ul class="tutorials-list">
+                {% for tutorial in task.content.resources.tutorials %}
+                    <li>{{ tutorial }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+{% endif %}
+
+{% if task_id == "task_1" and module_id=="5"%}
+    <div class="task-content module-5">
+        <h2 class="task-title">{{ task.title }}</h2>
+        <p class="task-description">{{ task.description }}</p>
+
+        <section class="resources-section">
+            <h3>Resources</h3>
+            <ul class="resources-list">
+                {% for resource in task.resources %}
+                    <li>
+                        <a href="{{ resource.link }}" target="_blank">{{ resource.title }}</a>: {{ resource.description }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="theory-section">
+            <h3>Theory</h3>
+            <h4>Pygame Surfaces</h4>
+            <p class="definition"><strong>Definition:</strong> {{ task.theory['Pygame Surfaces'].definition }}</p>
+            <h4>Key Points</h4>
+            <ul class="key-points-list">
+                {% for point in task.theory['Pygame Surfaces'].key_points %}
+                    <li><strong>{{ point.point }}:</strong> {{ point.details }}</li>
+                {% endfor %}
+            </ul>
+
+            <h4>Animation in Pygame</h4>
+            <p class="definition"><strong>Definition:</strong> {{ task.theory['Animation in Pygame'].definition }}</p>
+            <h4>Key Points</h4>
+            <ul class="key-points-list">
+                {% for point in task.theory['Animation in Pygame'].key_points %}
+                    <li><strong>{{ point.point }}:</strong> {{ point.details }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="explanation-section">
+            <h3>Explanation</h3>
+            <h4>Beginner Level</h4>
+            <ul class="beginner-content">
+                {% for content in task.explanation.beginner.content %}
+                    <li><strong>{{ content.tag | title }}:</strong> {{ content.text }}</li>
+                {% endfor %}
+            </ul>
+
+            <h4>Intermediate Level</h4>
+            <ul class="intermediate-content">
+                {% for content in task.explanation.intermediate.content %}
+                    <li><strong>{{ content.tag | title }}:</strong> {{ content.text }}</li>
+                {% endfor %}
+            </ul>
+
+            <h4>Advanced Level</h4>
+            <ul class="advanced-content">
+                {% for content in task.explanation.advanced.content %}
+                    <li><strong>{{ content.tag | title }}:</strong> {{ content.text }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </div>
+{% endif %}
+
+{% if task_id == "task_6" and module_id == "5" %}
+    <div class="task-content module-5-task6">
+        <h2 class="task-title">{{ task.title }}</h2>
+        <p class="task-description">{{ task.description }}</p>
+
+        <section class="key-points-section">
+            <h3>Key Points</h3>
+            <ul class="key-points-list">
+                {% for point in task.key_points %}
+                    <li>
+                        <strong>{{ point.title }}:</strong> {{ point.details }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section class="conclusion-section">
+            <h3>Conclusion</h3>
+            <p>{{ task.conclusion }}</p>
+        </section>
+
+        <section class="resources-section">
+            <h3>Additional Resources</h3>
+            <ul class="resources-list">
+                <li>
+                    <a href="{{ task.link }}" target="_blank">Learn more about Loading and Animating Pictures in Pygame</a>
+                </li>
+            </ul>
+        </section>
+    </div>
+{% endif %}
+        
+
+        </div>
+
+        <!-- Interpreter Section -->
+        <div id="interpreter-section" class="interpreter-section" style="display: none;">
+            <h2>Online Python Interpreter</h2>
+            <div style="display: flex;">
+                <textarea id="code" class="interpreter-textarea" rows="10" placeholder="Write your Python code here..."></textarea>
+            </div><br>
+            <button id="run-btn" class="btn btn-primary">Run Code</button>
+
+            <h2>Output:</h2>
+            <pre id="output" class="output-area border p-2"></pre>
+
+            <h2>Tracked Variables:</h2>
+            <pre id="variables" class="output-area border p-2"></pre>
+
+            <h2>Image Output:</h2>
+            <img id="output-image" src="" alt="Output Image" style="display:none; max-width: 100%;">
+        </div>
+    </main>
+</div>
+
+<!-- CodeMirror CSS and JS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+
+<script>
+    // Initialize CodeMirror
+    const editor = CodeMirror.fromTextArea(document.getElementById('code'), {
+        lineNumbers: true,
+        mode: "python",
+        theme: "default",
+        indentWithTabs: true,
+        tabSize: 4,
+        extraKeys: {
+            "Enter": function(cm) {
+                const cursor = cm.getCursor();
+                const line = cm.getLine(cursor.line);
+                const trimmedLine = line.trim();
+
+                if (trimmedLine.endsWith(':')) {
+                    cm.replaceRange('\n' + ' '.repeat(4), cursor);
+                    cm.setCursor(cursor.line + 1, 4);
+                } else {
+                    cm.replaceRange('\n' + line.match(/^\s*/)[0], cursor);
+                    cm.setCursor(cursor.line + 1, line.match(/^\s*/)[0].length);
+                }
+            },
+            "Shift-Enter": function(cm) {
+                const code = cm.getValue();
+                executeCode(code);
+            },
+            "Tab": function(cm) {
+                cm.replaceSelection('    '); // Add 4 spaces for tab
+            },
+            "Ctrl-Space": "autocomplete" // Trigger autocompletion if implemented
+        }
+    });
+
+    // Function to execute code
+    function executeCode(code) {
+        fetch('/interpreter', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ code: code })
+        })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(err => { throw new Error(err.error); });
+            }
+            return response.json();
+        })
+        .then(data => {
+            const outputElement = document.getElementById('output');
+            outputElement.textContent = data.output || '';
+
+            // Display tracked variables
+            const variablesElement = document.getElementById('variables');
+            variablesElement.textContent = JSON.stringify(data.variables, null, 2) || 'No variables tracked.';
+
+            // Check if there's an image to display
+            if (data.image) {
+                const imgElement = document.getElementById('output-image');
+                imgElement.src = data.image; // Set the source to the image path
+                imgElement.style.display = 'block'; // Make the image visible
+            } else {
+                document.getElementById('output-image').style.display = 'none'; // Hide image if not present
+            }
+
+            if (data.stderr) {
+                outputElement.textContent += '\nError:\n' + data.stderr;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error.message);
+            document.getElementById('output').textContent = 'Error: ' + error.message;
+        });
+    }
+
+    // Run code button functionality
+    document.getElementById('run-btn').addEventListener('click', function() {
+        const code = editor.getValue();
+        executeCode(code);
+    });
+
+    // Show the interpreter when the button is clicked
+    document.getElementById('open-interpreter-btn').addEventListener('click', function() {
+        const interpreterSection = document.getElementById('interpreter-section');
+        interpreterSection.style.display = interpreterSection.style.display === 'none' ? 'block' : 'none';
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Solution for {{ solution.code|truncate(30, True) }}{% endblock %}
+
+{% block content %}
+<div class="solution-container">
+    <h1>Solution</h1>
+
+    <div class="solution-code">
+        <h2>Code:</h2>
+        <pre><code>{{ solution.code }}</code></pre>
+    </div>
+
+    <div class="solution-steps">
+        <h2>Steps to Solution:</h2>
+        <ol>
+            {% for step in solution.steps %}
+                {% for step_key, step_content in step.items() %}
+                    <li>
+                        <strong>{{ step_key }}:</strong>
+                        <pre><code>{{ step_content['code_line'] }}</code></pre>
+                        <p>{{ step_content['description'] }}</p>
+                    </li>
+                {% endfor %}
+            {% endfor %}
+        </ol>
+    </div>
+
+    <div class="navigation-buttons">
+        <a href="{{ url_for('task_detail', module_id=module_id, task_id=task_id) }}" class="btn">Back to Task</a>
+        <a href="{{ url_for('explanation', module_id=module_id, task_id=task_id) }}" class="btn">View Explanation</a>
+        <a href="{{ url_for('interpreter', module_id=module_id, task_id=task_id) }}" class="btn">Open Interpreter</a>
+    </div>
+</div>
+{% endblock %}
