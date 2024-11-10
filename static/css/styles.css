@@ -100,7 +100,8 @@ header {
 }
 
 /* Sidebar Styles */
-.sidebar {
+.sidebar, 
+.task-detail-sidebar {
     width: 250px;
     background-color: #f8bbd0; /* Slightly darker pink */
     padding: 20px;
@@ -110,25 +111,30 @@ header {
     height: calc(100vh - 80px); /* Full height minus header */
 }
 
+.task-detail-sidebar {
+    margin-top: 50px; /* Adjust this value to create space from the top */
+}
 /* Sidebar Title */
-.sidebar h2 {
-    margin-top: 0;
+.sidebar, .task-detail-sidebar, h2 {
     font-size: 20px; /* Larger font size */
     color: #880e4f; /* Dark pink */
 }
 
 /* Sidebar List Styles */
-.sidebar ul {
+.sidebar, 
+.task-detail-sidebar, ul {
     list-style-type: none;
     padding: 0;
 }
 
-.sidebar ul li {
+.sidebar, 
+.task-detail-sidebar, ul li {
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.sidebar ul li a {
+.sidebar, 
+.task-detail-sidebar, ul li a {
     text-decoration: none;
     color: #880e4f; /* Dark pink */
     font-size: 16px; /* Adjust font size */
@@ -138,7 +144,8 @@ header {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.sidebar ul li a:hover {
+.sidebar, 
+.task-detail-sidebar, ul li a:hover {
     background-color: #e91e63; /* Different shade of pink */
     color: white;
 }
@@ -198,12 +205,14 @@ header {
         flex-direction: column;
     }
 
-    .sidebar,
+    .sidebar, 
+    .task-detail-sidebar,
     .main-content {
         width: 100%;
     }
 
-    .sidebar {
+    .sidebar, 
+    .task-detail-sidebar, {
         border-right: none; /* Remove right border on small screens */
         border-bottom: 2px solid #e3e3e3; /* Add bottom border */
     }
@@ -263,24 +272,28 @@ footer {
 }
 
 /* Sidebar styles */
-.sidebar {
+.sidebar, 
+.task-detail-sidebar {
     width: 25%; /* Adjust as needed */
     background-color: #f8f9fa; /* Light background for contrast */
     padding: 20px;
     border-right: 2px solid #e3e3e3;
 }
 
-.sidebar h2 {
+.sidebar, 
+.task-detail-sidebar, h2 {
     font-size: 1.5rem;
     margin-bottom: 15px;
 }
 
-.sidebar ul {
+.sidebar, 
+.task-detail-sidebar, ul {
     list-style: none;
     padding: 0;
 }
 
-.sidebar ul li {
+.sidebar, 
+.task-detail-sidebar, ul li {
     margin-bottom: 10px;
 }
 
@@ -301,6 +314,7 @@ footer {
 }
 
 .task-header {
+    margin-top:40px;
     margin-bottom: 20px;
 }
 
@@ -421,7 +435,8 @@ pre {
     display: flex;
 }
 
-.sidebar {
+.sidebar, 
+.task-detail-sidebar {
     width: 250px; /* Adjust width as needed */
     padding: 20px;
     background-color: #f8f9fa; /* Light background color */
@@ -429,6 +444,7 @@ pre {
 }
 
 .explanation-container {
+    margin-top:40px;
     flex: 1; /* Take up the remaining space */
     padding: 20px; /* Padding around content */
     background-color: #ffffff; /* White background for content */
@@ -555,6 +571,7 @@ code {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     max-width: 800px;
     margin: 20px auto;
+    margin-top:50px;
 }
 
 h1 {
@@ -853,4 +870,88 @@ pre {
     .explanation-section h3 {
         font-size: 18px;
     }
+}
+
+.interpreter-container {
+    background-color: #ffe6f2; /* Light pink background */
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.interpreter-title {
+    color: #d1006e; /* Dark pink */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navigation-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.navigation-buttons .btn {
+    margin: 0 10px;
+}
+
+.code-area {
+    width: 100%;
+    border: 2px solid #d1006e; /* Dark pink */
+    border-radius: 5px;
+    padding: 10px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.output-title, .tracked-vars-title, .image-output-title {
+    color: #d1006e; /* Dark pink */
+    margin-top: 20px;
+}
+
+.output-area {
+    border: 2px solid #d1006e; /* Dark pink */
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+    white-space: pre-wrap; /* Ensures that whitespaces are preserved */
+}
+
+.output-image {
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #d1006e; /* Dark pink */
+    border-radius: 5px;
+}
+
+.btn-primary {
+    background-color: #d1006e; /* Dark pink */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px auto;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #a8004e; /* Darker pink */
+}
+
+.btn-secondary {
+    background-color: #ffe6f2; /* Light pink */
+    color: #d1006e; /* Dark pink */
+    border: 2px solid #d1006e; /* Dark pink */
+    border-radius: 5px;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: #d1006e; /* Dark pink */
+    color: white;
 }

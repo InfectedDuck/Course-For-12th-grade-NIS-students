@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
 <div class="task-detail-container">
-    <aside class="sidebar">
+    <aside class="task-detail-sidebar">
         <h2>Modules</h2>
         <ul>
             {% if modules %}
@@ -32,12 +32,10 @@
             <div class="action-buttons">
                 <a href="{{ url_for('explanation', module_id=module_id, task_id=task_id) }}" class="btn">See Explanation</a>
                 <a href="{{ url_for('solution', module_id=module_id, task_id=task_id) }}" class="btn">See Solution</a>
-                <button id="open-interpreter-btn" class="btn">Open Interpreter</button>
+                <a href="{{ url_for('interpreter')}}" class="btn">Open Interpreter</a>
             </div>
             {% endif %}
         </div>
-
-        <div class="task-content">
             {% if task_id == "task_1" and module_id=="1"%}
             <div class="task-content">
                 <h2 class="task-title">Overview</h2>
@@ -358,120 +356,9 @@
         </section>
     </div>
 {% endif %}
+</main>
+</div>
         
 
-        </div>
 
-        <!-- Interpreter Section -->
-        <div id="interpreter-section" class="interpreter-section" style="display: none;">
-            <h2>Online Python Interpreter</h2>
-            <div style="display: flex;">
-                <textarea id="code" class="interpreter-textarea" rows="10" placeholder="Write your Python code here..."></textarea>
-            </div><br>
-            <button id="run-btn" class="btn btn-primary">Run Code</button>
-
-            <h2>Output:</h2>
-            <pre id="output" class="output-area border p-2"></pre>
-
-            <h2>Tracked Variables:</h2>
-            <pre id="variables" class="output-area border p-2"></pre>
-
-            <h2>Image Output:</h2>
-            <img id="output-image" src="" alt="Output Image" style="display:none; max-width: 100%;">
-        </div>
-    </main>
-</div>
-
-<!-- CodeMirror CSS and JS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
-
-<script>
-    // Initialize CodeMirror
-    const editor = CodeMirror.fromTextArea(document.getElementById('code'), {
-        lineNumbers: true,
-        mode: "python",
-        theme: "default",
-        indentWithTabs: true,
-        tabSize: 4,
-        extraKeys: {
-            "Enter": function(cm) {
-                const cursor = cm.getCursor();
-                const line = cm.getLine(cursor.line);
-                const trimmedLine = line.trim();
-
-                if (trimmedLine.endsWith(':')) {
-                    cm.replaceRange('\n' + ' '.repeat(4), cursor);
-                    cm.setCursor(cursor.line + 1, 4);
-                } else {
-                    cm.replaceRange('\n' + line.match(/^\s*/)[0], cursor);
-                    cm.setCursor(cursor.line + 1, line.match(/^\s*/)[0].length);
-                }
-            },
-            "Shift-Enter": function(cm) {
-                const code = cm.getValue();
-                executeCode(code);
-            },
-            "Tab": function(cm) {
-                cm.replaceSelection('    '); // Add 4 spaces for tab
-            },
-            "Ctrl-Space": "autocomplete" // Trigger autocompletion if implemented
-        }
-    });
-
-    // Function to execute code
-    function executeCode(code) {
-        fetch('/interpreter', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ code: code })
-        })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(err => { throw new Error(err.error); });
-            }
-            return response.json();
-        })
-        .then(data => {
-            const outputElement = document.getElementById('output');
-            outputElement.textContent = data.output || '';
-
-            // Display tracked variables
-            const variablesElement = document.getElementById('variables');
-            variablesElement.textContent = JSON.stringify(data.variables, null, 2) || 'No variables tracked.';
-
-            // Check if there's an image to display
-            if (data.image) {
-                const imgElement = document.getElementById('output-image');
-                imgElement.src = data.image; // Set the source to the image path
-                imgElement.style.display = 'block'; // Make the image visible
-            } else {
-                document.getElementById('output-image').style.display = 'none'; // Hide image if not present
-            }
-
-            if (data.stderr) {
-                outputElement.textContent += '\nError:\n' + data.stderr;
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error.message);
-            document.getElementById('output').textContent = 'Error: ' + error.message;
-        });
-    }
-
-    // Run code button functionality
-    document.getElementById('run-btn').addEventListener('click', function() {
-        const code = editor.getValue();
-        executeCode(code);
-    });
-
-    // Show the interpreter when the button is clicked
-    document.getElementById('open-interpreter-btn').addEventListener('click', function() {
-        const interpreterSection = document.getElementById('interpreter-section');
-        interpreterSection.style.display = interpreterSection.style.display === 'none' ? 'block' : 'none';
-    });
-</script>
 {% endblock %}

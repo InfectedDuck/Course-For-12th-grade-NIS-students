@@ -95,8 +95,9 @@
                 document.getElementById('output-image').style.display = 'none'; // Hide image if not present
             }
 
-            if (data.stderr) {
-                outputElement.textContent += '\nError:\n' + data.stderr;
+            // Handle standard error output
+            if (data.error) {
+                outputElement.textContent += '\nError:\n' + data.error;
             }
         })
         .catch(error => {

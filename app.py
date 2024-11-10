@@ -2,6 +2,11 @@ from flask import Flask, render_template, abort, send_from_directory, make_respo
 import json
 import subprocess
 import os
+import sys
+import io
+import random
+from PIL import Image, ImageDraw  # Import PIL for image processing
+import pygame  # Import Pygame
 
 app = Flask(__name__)
 
@@ -94,33 +99,46 @@ def solution(module_id, task_id):
             return response
     return "Solution not found", 404
 
-
 @app.route('/interpreter', methods=['GET', 'POST'])
 def interpreter():
     if request.method == 'POST':
         code = request.json.get('code')
         variables = {}  # Dictionary to store variable values
         output = []
+        image_path = None
+
         try:
             # Capture standard output
             from io import StringIO
-            import sys
 
             # Redirect stdout to capture print statements
             old_stdout = sys.stdout
             sys.stdout = StringIO()
 
-            # Execute the code
-            exec(code, {}, variables)  # Execute in a separate namespace
+            # Import the necessary libraries if not already done
+            exec("import random", {}, variables)
+            exec("from PIL import Image, ImageDraw", {}, variables)
+            exec("import pygame", {}, variables)
+
+            # Execute the user's code
+            exec(code, {}, variables)
 
             # Capture the output
             output.append(sys.stdout.getvalue())
             sys.stdout = old_stdout  # Restore stdout
 
+            # Handle images if created by user code
+            if 'img' in variables:  # Assuming the user creates an 'img' variable for Pillow
+                img = variables['img']
+                img.save('output_image.png')
+                image_path = 'output_image.png'
+
             return jsonify({
                 'output': '\n'.join(output),
-                'variables': variables  # Return the tracked variables
+                'variables': variables,  # Return the tracked variables
+                'image': image_path  # Return the path of the generated image
             })
+
         except Exception as e:
             sys.stdout = old_stdout  # Restore stdout
             return jsonify({'error': str(e)}), 400
